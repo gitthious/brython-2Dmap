@@ -23,6 +23,3 @@ You should see ![](vdo.gif)
 If you want to reuse, just copy all python files and leaflet directory anywhere
 and read https://brython.info/static_doc/fr/import.html
 
-## License
-
-**Brython2Dmap** is licensed under the MIT license. OpenStreetMap's open data license requires that derivative works provide proper attribution.
