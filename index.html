@@ -1,0 +1,63 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="brython.js"></script>
+    <script type="text/javascript" src="brython_stdlib.js"></script>
+</head>
+
+<body onload="brython(1)">
+<script type="text/python">
+
+from browser import document, html, bind
+import map2D
+
+def display_map(event=None):
+    op = {cb.name : cb.checked for cb in document.select('fieldset > input') }
+    #print(op)
+    
+    map = map2D.Map(document, 'carte', '600px','400px', [48.85335, 2.34876], 4, **op)
+
+    try:
+        del document['in_bounding_box']
+    except KeyError: 
+        pass
+
+    if op['bounding_box']:
+        import bbox_gui
+        input_bbox =  bbox_gui.BoundingBox_INPUT(id='in_bounding_box')
+        document <= input_bbox
+        
+        @bind(input_bbox, 'input')
+        def change(evt):
+            v = bbox_gui.BoundingBox_getvalue(evt.target)
+            print("input change", v)
+            if v:
+                map.bounding_box = v
+
+        def change_bounding_box(coords):
+            print("map change", coords)
+            bbox_gui.BoundingBox_setvalue(input_bbox, coords)
+
+            
+        map.bind('bounding_box', change_bounding_box)
+
+
+options = ['geocoder', 'scale', 'fullscreen', 'bounding_box']
+fieldset = html.FIELDSET(html.LEGEND("Options de carte :"))
+for id in options:
+    input = html.INPUT(type='checkbox', id=id, name=id, checked=True)
+    input.bind('click', display_map)
+    fieldset <= input
+    fieldset <= html.LABEL(id, **{'for':id})
+    fieldset <= html.BR()
+
+document <= fieldset #+ html.BUTTON("Voir la carte", id='voir')
+display_map()
+
+        
+</script>
+</body>
+
+</html>
