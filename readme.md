@@ -11,7 +11,7 @@ Use [leaflet]()
 
 in shell run 
 ```
-> python -m http.server
+python -m http.server
 ```
 
 Launch webbrowser with http://localhost:8000 URL
@@ -20,6 +20,6 @@ You should see ![](vdo.gif)
 
 ## Reuse
 
-If you want to reuse, just copy all python files and leaflet directory anywhere
+If you want to reuse it, just copy all python files and leaflet directory anywhere
 and read https://brython.info/static_doc/fr/import.html
 

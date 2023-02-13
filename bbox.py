@@ -12,6 +12,8 @@ class BoundingBox(tuple):
     """
     Define geographic bounding box. Use official order for parameters, as
     south, west, north, east
+    
+    
     >>> b = BoundingBox(48.5766,7.5929,48.6057,7.6645)
     >>> b
     (48.5766, 7.5929, 48.6057, 7.6645)
@@ -97,9 +99,6 @@ class BoundingBox(tuple):
                 and lon >= self.west and lon <= self.east
     def __str__(self):
         return ', '.join((f"{float(v):.5f}".rstrip('0') for v in self))
-
-    # def __repr__(self):
-        # return str(self)
 
 if __name__ == "__main__":
     import doctest
